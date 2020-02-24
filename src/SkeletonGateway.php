@@ -11,31 +11,42 @@ class SkeletonGateway extends AbstractGateway
 {
     public function getName()
     {
-        return 'Skeleton';
+        return 'Paystack';
     }
 
     public function getDefaultParameters()
     {
         return array(
-            'key' => '',
-            'testMode' => false,
+            'secret_key' => '',
+            'public_key' => '',
+            'callback_url' => ''
         );
     }
 
-    public function getKey()
+    public function getSecretKey()
     {
-        return $this->getParameter('key');
+        return $this->getParameter('secret_key');
     }
 
-    public function setKey($value)
+    public function setSecretKey($value)
     {
-        return $this->setParameter('key', $value);
+        return $this->setParameter('secret_key', $value);
+    }
+
+    public function getPublicKey()
+    {
+        return $this->getParameter('public_key');
+    }
+
+    public function setPublicKey($value)
+    {
+        return $this->setParameter('public_key', $value);
     }
 
     /**
      * @return Message\AuthorizeRequest
      */
-    public function authorize(array $parameters = array())
+    public function purchase(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\Skeleton\Message\AuthorizeRequest', $parameters);
     }
