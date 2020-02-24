@@ -10,7 +10,7 @@ class PurchaseRequest extends AbstractRequest
      */
     public function getData()
     {
-        $this->validate('amount', 'email');
+        //$this->validate('amount', 'email');
         $amount = $this->getAmount();
 
         return [
