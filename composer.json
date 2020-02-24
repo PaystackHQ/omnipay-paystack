@@ -1,11 +1,11 @@
 {
-    "name": ":vendor/omnipay-:gateway",
+    "name": "paystackhq/omnipay-paystack",
     "description": ":package_description",
     "keywords": [
         "omnipay",
         ":gateway"
     ],
-    "homepage": "https://github.com/:vendor/omnipay-:gateway",
+    "homepage": "https://github.com/paystackhq/omnipay-paystack",
     "license": "MIT",
     "authors": [
         {
