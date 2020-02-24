@@ -32,7 +32,7 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
 
     public function getRedirectMethod() 
     {
-        return "GET"
+        return "GET";
     }
 
     public function getCode()
