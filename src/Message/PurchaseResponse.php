@@ -15,17 +15,11 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
         return false;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isRedirect()
     {
         return true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRedirectUrl()
     {
         return $this->data['authorization_url'];
@@ -36,19 +30,18 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
         return $this->data;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAccessCode()
+    public function getRedirectMethod() 
     {
-        return $this->data->access_code;
+        return "GET"
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function getCode()
+    {
+        return $this->data['access_code'];
+    }
+
     public function getTransactionReference()
     {
-        return $this->data->reference;
+        return $this->data['reference'];
     }
 }
