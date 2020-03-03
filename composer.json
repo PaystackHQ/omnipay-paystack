@@ -1,17 +1,17 @@
 {
     "name": "paystackhq/omnipay-paystack",
-    "description": ":package_description",
+    "description": "The Paystack gateway for Omnipay",
     "keywords": [
         "omnipay",
-        ":gateway"
+        "paystack"
     ],
     "homepage": "https://github.com/paystackhq/omnipay-paystack",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": ":author_email",
-            "homepage": ":author_website"
+            "name": "Paystack Integrations",
+            "email": "support@paystack.com",
+            "homepage": "https://www.paystack.com"
         }
     ],
     "require": {
@@ -24,12 +24,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Omnipay\\Skeleton\\": "src"
+            "Omnipay\\Paystack\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "League\\Skeleton\\Test\\": "tests"
+            "League\\Paystack\\Test\\": "tests"
         }
     },
     "scripts": {

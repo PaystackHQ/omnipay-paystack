@@ -1,13 +1,13 @@
 <?php
 
-namespace Omnipay\Skeleton;
+namespace Omnipay\Paystack;
 
 use Omnipay\Common\AbstractGateway;
 
 /**
  * Skeleton Gateway
  */
-class SkeletonGateway extends AbstractGateway
+class Gateway extends AbstractGateway
 {
     public function getName()
     {
@@ -19,7 +19,6 @@ class SkeletonGateway extends AbstractGateway
         return array(
             'secret_key' => '',
             'public_key' => '',
-            'callback_url' => ''
         );
     }
 

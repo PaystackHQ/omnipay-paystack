@@ -1,6 +1,6 @@
 <?php
 
-namespace Omnipay\Skeleton\Message;
+namespace Omnipay\Paystack\Message;
 
 use Omnipay\Common\Message\AbstractRequest as BaseAbstractRequest;
 
@@ -10,8 +10,6 @@ use Omnipay\Common\Message\AbstractRequest as BaseAbstractRequest;
  */
 abstract class AbstractRequest extends BaseAbstractRequest
 {
-    protected $liveEndpoint = 'https://api.example.com';
-    protected $testEndpoint = 'https://api-test.example.com';
 
     public function getKey()
     {

@@ -1,15 +1,13 @@
 <?php
 
-namespace Omnipay\Paystack\Messages;
+namespace Omnipay\Paystack\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RedirectResponseInterface;
 
 class PurchaseResponse extends AbstractResponse implements RedirectResponseInterface
 {
-    /**
-     * {@inheritdoc}
-     */
+    
     public function isSuccessful()
     {
         return false;
