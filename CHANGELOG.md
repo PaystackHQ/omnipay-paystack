@@ -1,20 +1,25 @@
 # Changelog
 
-All Notable changes to `:package_name` will be documented in this file
+All Notable changes to `omnipay-paystack` will be documented in this file
 
 ## NEXT - YYYY-MM-DD
 
 ### Added
-- Nothing
+
+-   Nothing
 
 ### Deprecated
-- Nothing
+
+-   Nothing
 
 ### Fixed
-- Nothing
+
+-   Nothing
 
 ### Removed
-- Nothing
+
+-   Nothing
 
 ### Security
-- Nothing
+
+-   Nothing

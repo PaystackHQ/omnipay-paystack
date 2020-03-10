@@ -1,14 +1,4 @@
-# Omnipay: :gateway
-
-**Skeleton gateway for the Omnipay PHP payment processing library**
-
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor/omnipay-:gateway.svg?style=flat-square)](https://packagist.org/packages/:vendor/omnipay-:gateway)
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/:vendor/omnipay-:gateway/master.svg?style=flat-square)](https://travis-ci.org/:vendor/omnipay-:gateway)
-[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/:vendor/omnipay-:gateway.svg?style=flat-square)](https://scrutinizer-ci.com/g/:vendor/omnipay-:gateway/code-structure)
-[![Quality Score](https://img.shields.io/scrutinizer/g/:vendor/omnipay-:gateway.svg?style=flat-square)](https://scrutinizer-ci.com/g/:vendor/omnipay-:gateway)
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor/omnipay-:gateway.svg?style=flat-square)](https://packagist.org/packages/:vendor/omnipay-:gateway)
-
+# Omnipay: Paystack
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
 processing library for PHP 5.3+. This package implements :gateway support for Omnipay.
@@ -22,15 +12,15 @@ PSRs you support to avoid any confusion with users and contributors.
 
 Instal the gateway using require. Require the `league/omnipay` base package and this gateway.
 
-``` bash
-$ composer require league/omnipay :vendor/omnipay-:gateway
+```bash
+$ composer require league/omnipay paystackhq/omnipay-paystack
 ```
 
 ## Usage
 
 The following gateways are provided by this package:
 
- * :gateway
+-   Paystack
 
 For general usage instructions, please see the main [Omnipay](https://github.com/thephpleague/omnipay) repository.
 
@@ -44,7 +34,7 @@ If you want to keep up to date with release announcements, discuss ideas for the
 or ask more detailed questions, there is also a [mailing list](https://groups.google.com/forum/#!forum/omnipay) which
 you can subscribe to.
 
-If you believe you have found a bug, please report it using the [GitHub issue tracker](https://github.com/:vendor/omnipay-:gateway/issues),
+If you believe you have found a bug, please report it using the [GitHub issue tracker](https://github.com/paystackhq/omnipay-paystack/issues),
 or better yet, fork the library and submit a pull request.
 
 ## Change log
@@ -53,7 +43,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 
 ## Testing
 
-``` bash
+```bash
 $ composer test
 ```
 
@@ -67,8 +57,8 @@ If you discover any security related issues, please email :author_email instead 
 
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
-- [All Contributors](../../contributors)
+-   [:author_name](https://github.com/paystackhq)
+-   [All Contributors](../../contributors)
 
 ## License
 
