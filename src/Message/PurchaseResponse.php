@@ -40,9 +40,6 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
         return '';
     }
 
-    /**
-     * @return array
-     */
     public function getRedirectData()
     {
         // Only required if the redirect method is POST

@@ -15,7 +15,7 @@ class PurchaseRequest extends AbstractRequest
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function getData()
     {
