@@ -4,27 +4,58 @@ namespace Omnipay\Paystack\Message;
 
 class CompletePurchaseResponse extends \Omnipay\Common\Message\AbstractResponse
 {
-    
+
     public function isSuccessful()
     {
         return 'success' === $this->getCode();
     }
 
-    
     public function getTransactionId()
     {
-        return $this->data['id'];
+        if (isset($this->data['data']) && $data = $this->data['data']) {
+            if ($data['reference']) {
+                return $data['reference'];
+            }
+        }
     }
 
-    
+    public function getMessage()
+    {
+        if (isset($this->data['data']) && $data = $this->data['data']) {
+            if ($data['message']) {
+                return $data['message'];
+            }
+        }
+
+        if (isset($this->data['data']) && $data = $this->data['data']) {
+            if ($data['gateway_response']) {
+                return $data['gateway_response'];
+            }
+        }
+
+        if (isset($this->data['message']) && $message = $this->data['message']) {
+            return $message;
+        }
+
+        return '';
+    }
+
     public function getTransactionReference()
     {
-        return $this->data['reference'];
+        if (isset($this->data['data']) && $data = $this->data['data']) {
+            return $data['reference'];
+        }
+
+        return '';
     }
 
-    
+
     public function getCode()
     {
-        return $this->data['status'];
+        if (isset($this->data['data']) && $data = $this->data['data']) {
+            return $data['status'];
+        }
+
+        return '';
     }
 }
