@@ -39,32 +39,14 @@ class PurchaseRequest extends AbstractRequest
     public function sendData($data)
     {
         try {
+            $headers = [
+                'Authorization' => 'Bearer ' . $this->getSecretKey(),
+                'Content-Type' => 'application/json',
+                'Cache-Control' => 'no-cache'
+            ];
 
-            // TODO: Move to omnipay's httpClient e.g:
-            //$headers = [
-            //  'Authorization' => 'Bearer ' . $this->getSecretKey()
-            //];
-            //$httpResponse = $this->httpClient->request('POST', $this->getEndpoint(), $headers, json_encode($data));
-
-            $secret_key = $this->getParameter('secret_key');
-
-            $curl = curl_init();
-
-            curl_setopt_array($curl, [
-                CURLOPT_URL => $this->getApiEndpoint(),
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => json_encode($data),
-                CURLOPT_HTTPHEADER => [
-                    "authorization: Bearer $secret_key",
-                    "content-type: application/json",
-                    "cache-control: no-cache"
-                ],
-            ]);
-
-            $response = curl_exec($curl);
-
-            $responseData = json_decode($response, true);
+            $response = $this->httpClient->request('POST', $this->getApiEndpoint(), $headers, json_encode($data));
+            $responseData = json_decode((string)$response->getBody(), true);
         } catch (\Exception $e) {
             throw new InvalidRequestException($e->getMessage(), $e->getCode(), $e);
         }
