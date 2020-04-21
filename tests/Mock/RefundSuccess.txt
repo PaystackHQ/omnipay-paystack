@@ -1,0 +1,70 @@
+HTTP/1.1 200 OK
+Server: Apache
+Date: Sun, 11 May 2014 21:17:31 GMT
+Content-Type: application/json; charset=utf-8
+Status: 200 OK
+
+{
+    "status": true,
+    "message": "Refund created",
+    "data": {
+        "dispute": 14030,
+        "transaction": {
+            "id": 36357029,
+            "domain": "live",
+            "status": "reversed",
+            "reference": "8c3fd38b98936a4c04bd9e20f8247b97",
+            "amount": 2500,
+            "message": null,
+            "gateway_response": "Approved",
+            "paid_at": "2018-06-27T09:50:55.000Z",
+            "created_at": "2018-06-27T09:50:00.000Z",
+            "channel": "card",
+            "currency": "NGN",
+            "ip_address": "54.162.150.5, 172.68.65.71, 172.31.7.148",
+            "metadata": {
+                "custom_fields": [
+                    {
+                        "display_name": "Started From",
+                        "variable_name": "started_from",
+                        "value": "sample charge card backend"
+                    },
+                    {
+                        "display_name": "Requested by",
+                        "variable_name": "requested_by",
+                        "value": "Mr. Akinlade"
+                    },
+                    {
+                        "display_name": "Server",
+                        "variable_name": "server",
+                        "value": "infinite-peak-60063.herokuapp.com"
+                    }
+                ]
+            },
+            "log": null,
+            "fees": 38,
+            "fees_split": null,
+            "authorization": 7430322,
+            "customer": 22421,
+            "plan": {},
+            "subaccount": {},
+            "paidAt": "2018-06-27T09:50:55.000Z",
+            "createdAt": "2018-06-27T09:50:00.000Z"
+        },
+        "currency": "NGN",
+        "amount": 2500,
+        "channel": null,
+        "customer_note": "I love people",
+        "merchant_note": "People are awesome",
+        "integration": 100073,
+        "domain": "live",
+        "status": "pending",
+        "refunded_by": "refunds@paystack.co",
+        "refunded_at": "2018-07-05T12:03:26.269Z",
+        "expected_at": "2018-07-12T12:03:26.000Z",
+        "fully_deducted": false,
+        "id": 5679,
+        "createdAt": "2018-07-05T12:03:26.269Z",
+        "updatedAt": "2018-07-05T12:03:26.269Z"
+    }
+}
