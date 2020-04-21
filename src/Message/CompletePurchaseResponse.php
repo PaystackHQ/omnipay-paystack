@@ -2,7 +2,9 @@
 
 namespace Omnipay\Paystack\Message;
 
-class CompletePurchaseResponse extends \Omnipay\Common\Message\AbstractResponse
+use Omnipay\Common\Message\AbstractResponse;
+
+class CompletePurchaseResponse extends AbstractResponse
 {
 
     public function isSuccessful()
