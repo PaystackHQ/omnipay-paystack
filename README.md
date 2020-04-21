@@ -1,13 +1,11 @@
-# Omnipay: Paystack
+# Paystack support for Omnipay
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
 processing library for PHP 5.3+. This package implements Paystack support for Omnipay.
 
-*TODO* Add description
-
 ## Install
 
-Instal the gateway using require. Require the `league/omnipay` base package and this gateway.
+Install the gateway using require. Require the `league/omnipay` base package and this gateway.
 
 ```bash
 $ composer require league/omnipay paystackhq/omnipay-paystack
@@ -17,7 +15,7 @@ $ composer require league/omnipay paystackhq/omnipay-paystack
 
 The following gateways are provided by this package:
 
--   Paystack
+-   Paystack (Offsite Redirect)
 
 For general usage instructions, please see the main [Omnipay](https://github.com/thephpleague/omnipay) repository.
 
