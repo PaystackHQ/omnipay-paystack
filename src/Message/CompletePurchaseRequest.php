@@ -28,15 +28,11 @@ class CompletePurchaseRequest extends AbstractRequest
     public function sendData($data)
     {
         try {
-            $headers = [
-                'Authorization' => 'Bearer ' . $this->getSecretKey(),
-                'Content-Type' => 'application/json',
-                'Cache-Control' => 'no-cache'
-            ];
 
-            $response = $this->httpClient->request('GET', $this->getApiEndpoint(), $headers, json_encode($data));
-            $responseData = json_decode((string)$response->getBody(), true);
+            $response = $this->sendRequest('GET', $this->getApiEndpoint(), json_encode($data));
+
         } catch (\Exception $e) {
+            
             throw new InvalidRequestException($e->getMessage(), $e->getCode(), $e);
         }
 

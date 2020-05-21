@@ -37,4 +37,20 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     {
         $this->setParameter('secret_key', $value);
     }
+
+    protected function sendRequest($method, $endpoint, array $data = null)
+    {
+        
+            $headers = [
+                'Authorization' => 'Bearer ' . $this->getSecretKey(),
+                'Content-Type' => 'application/json',
+                'Cache-Control' => 'no-cache'
+            ];
+
+            $response = $this->httpClient->request($method, $this->baseApiEndpoint. $endpoint, $headers, json_encode($data));
+            $responseData = json_decode((string)$response->getBody(), true);
+
+            return $responseData;
+        
+    }
 }

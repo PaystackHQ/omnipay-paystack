@@ -39,19 +39,12 @@ class PurchaseRequest extends AbstractRequest
     public function sendData($data)
     {
         try {
-            $headers = [
-                'Authorization' => 'Bearer ' . $this->getSecretKey(),
-                'Content-Type' => 'application/json',
-                'Cache-Control' => 'no-cache'
-            ];
-
-            $response = $this->httpClient->request('POST', $this->getApiEndpoint(), $headers, json_encode($data));
-            $responseData = json_decode((string)$response->getBody(), true);
+            $response = $this->sendRequest('POST', $this->getApiEndpoint(), $data);
         } catch (\Exception $e) {
             throw new InvalidRequestException($e->getMessage(), $e->getCode(), $e);
         }
 
-        return $this->response = new PurchaseResponse($this, $responseData);
+        return $this->response = new PurchaseResponse($this, $response);
     }
 
     /**
