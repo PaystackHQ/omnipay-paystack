@@ -1,61 +1,63 @@
 <?php
-namespace Omnipay\Paystack\Messages;
+
+namespace Omnipay\Paystack\Message;
 
 use Omnipay\Common\Exception\InvalidRequestException;
 
 class PurchaseRequest extends AbstractRequest
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
+     */
+    public function getApiEndpoint()
+    {
+        return $this->baseApiEndpoint . '/transaction/initialize/';
+    }
+
+    /**
+     * @inheritdoc
      */
     public function getData()
     {
-        //$this->validate('amount', 'email');
-        $amount = $this->getAmount();
+        $this->validate('amount', 'email');
+
+        $amount = $this->getAmountInteger();
+        $email = $this->getParameter('email');
+        $reference = $this->getTransactionReference();
 
         return [
-            'amount'       => $amount*100,
-            'email'        => $this->getParameter('email'),
-            'callback_url' => $this->getReturnUrl()
+            'amount' => $amount,
+            'email' => $email,
+            'callback_url' => $this->getReturnUrl(),
+            'reference' => $reference
         ];
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function sendData($data)
     {
         try {
+            $headers = [
+                'Authorization' => 'Bearer ' . $this->getSecretKey(),
+                'Content-Type' => 'application/json',
+                'Cache-Control' => 'no-cache'
+            ];
 
-            $secret_key = $this->getParameter('secret_key');
-            $curl = curl_init();
-
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://api.paystack.co/transaction/initialize",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => json_encode($data),
-                CURLOPT_HTTPHEADER => [
-                  "authorization: Bearer $secret_key",
-                  "content-type: application/json",
-                  "cache-control: no-cache"
-                ],
-              ));
-            
-              $response = curl_exec($curl);
-
-              $tranx = json_decode($response, true);
+            $response = $this->httpClient->request('POST', $this->getApiEndpoint(), $headers, json_encode($data));
+            $responseData = json_decode((string)$response->getBody(), true);
         } catch (\Exception $e) {
             throw new InvalidRequestException($e->getMessage(), $e->getCode(), $e);
         }
 
-        return $this->response = new PurchaseResponse($this, $tranx['data']);
+        return $this->response = new PurchaseResponse($this, $responseData);
     }
 
     /**
      * Sets the email parameter.
      *
-     * @param  string $email
+     * @param string $email
      * @return $this
      */
     public function setEmail($email)

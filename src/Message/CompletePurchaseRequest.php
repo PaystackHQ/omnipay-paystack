@@ -6,28 +6,40 @@ use Omnipay\Common\Exception\InvalidRequestException;
 
 class CompletePurchaseRequest extends AbstractRequest
 {
+    /**
+     * @inheritDoc
+     */
+    public function getApiEndpoint()
+    {
+        return $this->baseApiEndpoint . 'transaction/verify/' . rawurlencode($this->getTransactionReference());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getData()
+    {
+        return [];
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function sendData($data)
     {
         try {
-            $curl = curl_init();
+            $headers = [
+                'Authorization' => 'Bearer ' . $this->getSecretKey(),
+                'Content-Type' => 'application/json',
+                'Cache-Control' => 'no-cache'
+            ];
 
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => "https://api.paystack.co/transaction/verify" . rawurlencode($reference),
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_HTTPHEADER => [
-                  "authorization: Bearer " . $this->getSecretKey(),
-                  "content-type: application/json",
-                  "cache-control: no-cache"
-                ],
-              ));
-            
-              $response = curl_exec($curl);
-
-              $tranx = json_decode($response, true);
+            $response = $this->httpClient->request('GET', $this->getApiEndpoint(), $headers, json_encode($data));
+            $responseData = json_decode((string)$response->getBody(), true);
         } catch (\Exception $e) {
             throw new InvalidRequestException($e->getMessage(), $e->getCode(), $e);
         }
 
-        return $this->response = new CompletePurchaseResponse($this, $tranx['data']);
+        return $this->response = new CompletePurchaseResponse($this, $responseData);
     }
 }

@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+Server: Apache
+Date: Sun, 11 May 2014 21:17:31 GMT
+Content-Type: application/json; charset=utf-8
+Status: 200 OK
+
+{
+    "status": true,
+    "message": "Authorization URL created",
+    "data": {
+        "authorization_url": "https://checkout.paystack.com/s6vsqhiu9soezwx",
+        "access_code": "s6vsqhiu9soezwx",
+        "reference": "8c3fd38b98936a4c04bd9e20f8247b97"
+    }
+}
