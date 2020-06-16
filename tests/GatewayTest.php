@@ -13,6 +13,12 @@ class GatewayTest extends GatewayTestCase
     /** @var Gateway */
     protected $gateway;
 
+    /** @var array */
+    protected $options;
+
+    /**
+     *
+     */
     public function setUp()
     {
         parent::setUp();
@@ -25,6 +31,9 @@ class GatewayTest extends GatewayTestCase
         ];
     }
 
+    /**
+     *
+     */
     public function testPurchase()
     {
         $this->setMockHttpResponse('PurchaseSuccess.txt');
@@ -36,10 +45,17 @@ class GatewayTest extends GatewayTestCase
         $response = $this->gateway->purchase($options)->send();
 
         $this->assertTrue($response->isRedirect(), 'Purchase response is a redirect');
-        $this->assertEquals(static::PURCHASE_REFERENCE, $response->getTransactionReference(), 'Reference is as we gave it.');
+        $this->assertEquals(
+            static::PURCHASE_REFERENCE,
+            $response->getTransactionReference(),
+            'Reference is as we gave it.'
+        );
         $this->assertEquals('Authorization URL created', $response->getMessage());
     }
 
+    /**
+     *
+     */
     public function testRefund()
     {
         $this->setMockHttpResponse('RefundSuccess.txt');

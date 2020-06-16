@@ -9,6 +9,13 @@ class RefundResponse extends AbstractResponse
 
     public function isSuccessful()
     {
+
+        if (isset($this->data['data']) && $transaction = $this->data['data']['transaction']) {
+            if (isset($transaction['status']) && $transaction['status'] == 'reversed') {
+                return true;
+            }
+        }
+
         return false;
     }
 
@@ -38,9 +45,8 @@ class RefundResponse extends AbstractResponse
     public function getTransactionReference()
     {
         if (isset($this->data['data']) && $data = $this->data['data']) {
-            if(isset($data['transaction']) && $transaction = $data['transaction'])
-            {
-                return $transaction['id'];
+            if (isset($data['transaction']) && $transaction = $data['transaction']) {
+                return $transaction['reference'];
             }
         }
 
