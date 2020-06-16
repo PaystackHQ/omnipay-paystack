@@ -20,7 +20,7 @@ class GatewayTest extends GatewayTestCase
         $this->gateway = new Gateway($this->getHttpClient(), $this->getHttpRequest());
 
         $this->options = [
-            'amount' => '100',
+            'amount' => '2500',
             'reference' => static::PURCHASE_REFERENCE
         ];
     }
@@ -30,8 +30,7 @@ class GatewayTest extends GatewayTestCase
         $this->setMockHttpResponse('PurchaseSuccess.txt');
 
         $options = array_merge($this->options, [
-            'email' => 'email@email.com',
-            'reference' => static::PURCHASE_REFERENCE
+            'email' => 'email@email.com'
         ]);
 
         $response = $this->gateway->purchase($options)->send();

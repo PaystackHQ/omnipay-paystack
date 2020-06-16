@@ -23,14 +23,19 @@ class PurchaseRequest extends AbstractRequest
 
         $amount = $this->getAmountInteger();
         $email = $this->getParameter('email');
-        $reference = $this->getTransactionReference();
 
-        return [
+        $data = [
             'amount' => $amount,
             'email' => $email,
             'callback_url' => $this->getReturnUrl(),
-            'reference' => $reference
+            'metadata' => $this->getParameter('metadata')
         ];
+
+        if ($reference = $this->getTransactionReference()) {
+            $data['reference'] = $reference;
+        }
+
+        return $data;
     }
 
     /**
@@ -39,13 +44,7 @@ class PurchaseRequest extends AbstractRequest
     public function sendData($data)
     {
         try {
-            $headers = [
-                'Authorization' => 'Bearer ' . $this->getSecretKey(),
-                'Content-Type' => 'application/json',
-                'Cache-Control' => 'no-cache'
-            ];
-
-            $response = $this->httpClient->request('POST', $this->getApiEndpoint(), $headers, json_encode($data));
+            $response = $this->httpClient->request('POST', $this->getApiEndpoint(), $this->getRequestHeaders(), json_encode($data));
             $responseData = json_decode((string)$response->getBody(), true);
         } catch (\Exception $e) {
             throw new InvalidRequestException($e->getMessage(), $e->getCode(), $e);

@@ -3,10 +3,10 @@
 namespace Omnipay\Paystack\Message;
 
 use Omnipay\Common\Message\AbstractResponse;
-use Omnipay\Common\Message\RedirectResponseInterface;
 
-class PurchaseResponse extends AbstractResponse implements RedirectResponseInterface
+class RefundResponse extends AbstractResponse
 {
+
     public function isSuccessful()
     {
         return false;
@@ -14,20 +14,7 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
 
     public function isRedirect()
     {
-        if (isset($this->data['status']) && $this->data['status'] == true && $this->getRedirectUrl()) {
-            return true;
-        }
-
         return false;
-    }
-
-    public function getRedirectUrl()
-    {
-        if (isset($this->data['data']) && $data = $this->data['data']) {
-            return $data['authorization_url'];
-        }
-
-        return '';
     }
 
     public function getMessage()
@@ -37,17 +24,6 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
         }
 
         return '';
-    }
-
-    public function getRedirectData()
-    {
-        // Only required if the redirect method is POST
-        return [];
-    }
-
-    public function getRedirectMethod()
-    {
-        return 'GET';
     }
 
     public function getCode()
@@ -62,7 +38,10 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
     public function getTransactionReference()
     {
         if (isset($this->data['data']) && $data = $this->data['data']) {
-            return $data['reference'];
+            if(isset($data['transaction']) && $transaction = $data['transaction'])
+            {
+                return $transaction['id'];
+            }
         }
 
         return '';
