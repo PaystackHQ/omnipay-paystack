@@ -2,12 +2,11 @@
 
 namespace Omnipay\Paystack\Message;
 
-use Omnipay\Common\Exception\BadMethodCallException;
 use Omnipay\Common\Exception\InvalidRequestException;
 
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 {
-    protected $baseApiEndpoint = 'https://api.paystack.co/';
+    protected $baseApiEndpoint = 'https://api.paystack.co';
 
     /**
      * @return string The URL endpoint for the request

@@ -11,7 +11,7 @@ class PurchaseRequest extends AbstractRequest
      */
     public function getApiEndpoint()
     {
-        return $this->baseApiEndpoint . '/transaction/initialize/';
+        return '/transaction/initialize';
     }
 
     /**
@@ -26,7 +26,9 @@ class PurchaseRequest extends AbstractRequest
 
         return [
             'amount' => $amount,
+            'currency' => $this->getCurrency(),
             'email' => $email,
+            'reference' => $this->getTransactionReference(),
             'callback_url' => $this->getReturnUrl(),
             'metadata' => $this->getParameter('metadata')
         ];

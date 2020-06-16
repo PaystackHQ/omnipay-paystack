@@ -11,7 +11,7 @@ class RefundRequest extends AbstractRequest
      */
     public function getApiEndpoint()
     {
-        return $this->baseApiEndpoint . '/refund';
+        return '/refund';
     }
 
     /**
@@ -19,13 +19,12 @@ class RefundRequest extends AbstractRequest
      */
     public function getData()
     {
-        $amount = $this->getAmountInteger();
-        $reference = $this->getTransactionReference();
+        $data = [];
+        $data['transaction'] = $this->getTransactionReference();
+        $data['currency'] = $this->getCurrency();
 
-        $data = ['transaction' => $reference];
-
-        if ($amount) {
-            $data['amount'] = $amount;
+        if ($this->getAmountInteger()) {
+            $data['amount'] = $this->getAmountInteger();
         }
 
         return $data;
