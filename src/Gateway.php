@@ -5,7 +5,7 @@ namespace Omnipay\Paystack;
 use Omnipay\Common\AbstractGateway;
 use Omnipay\Paystack\Message\CompletePurchaseRequest;
 use Omnipay\Paystack\Message\PurchaseRequest;
-use Omnipay\Paystack\Message\PurchaseResponse;
+use Omnipay\Paystack\Message\RefundRequest;
 
 /**
  * PayStack Gateway
@@ -80,5 +80,13 @@ class Gateway extends AbstractGateway
     public function completePurchase(array $parameters = [])
     {
         return $this->createRequest(CompletePurchaseRequest::class, $parameters);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function refund(array $parameters = [])
+    {
+        return $this->createRequest(RefundRequest::class, $parameters);
     }
 }

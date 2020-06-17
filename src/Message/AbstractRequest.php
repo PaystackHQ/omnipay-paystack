@@ -2,12 +2,11 @@
 
 namespace Omnipay\Paystack\Message;
 
-use Omnipay\Common\Exception\BadMethodCallException;
 use Omnipay\Common\Exception\InvalidRequestException;
 
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 {
-    protected $baseApiEndpoint = 'https://api.paystack.co/';
+    protected $baseApiEndpoint = 'https://api.paystack.co';
 
     /**
      * @return string The URL endpoint for the request
@@ -40,17 +39,21 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 
     protected function sendRequest($method, $endpoint, array $data = null)
     {
-        
-            $headers = [
-                'Authorization' => 'Bearer ' . $this->getSecretKey(),
-                'Content-Type' => 'application/json',
-                'Cache-Control' => 'no-cache'
-            ];
+        $headers = [
+            'Authorization' => 'Bearer ' . $this->getSecretKey(),
+            'Content-Type' => 'application/json',
+            'Cache-Control' => 'no-cache'
+        ];
 
-            $response = $this->httpClient->request($method, $this->baseApiEndpoint. $endpoint, $headers, json_encode($data));
-            $responseData = json_decode((string)$response->getBody(), true);
+        $url = $this->baseApiEndpoint . $endpoint;
+        $response = $this->httpClient->request(
+            $method,
+            $url,
+            $headers,
+            json_encode($data)
+        );
+        $responseData = json_decode((string)$response->getBody(), true);
 
-            return $responseData;
-        
+        return $responseData;
     }
 }

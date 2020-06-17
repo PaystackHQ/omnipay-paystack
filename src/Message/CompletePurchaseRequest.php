@@ -11,7 +11,7 @@ class CompletePurchaseRequest extends AbstractRequest
      */
     public function getApiEndpoint()
     {
-        return $this->baseApiEndpoint . 'transaction/verify/' . rawurlencode($this->getTransactionReference());
+        return '/transaction/verify/' . rawurlencode($this->getTransactionReference());
     }
 
     /**
@@ -28,14 +28,11 @@ class CompletePurchaseRequest extends AbstractRequest
     public function sendData($data)
     {
         try {
-
-            $response = $this->sendRequest('GET', $this->getApiEndpoint(), json_encode($data));
-
+            $response = $this->sendRequest('GET', $this->getApiEndpoint(), $data);
         } catch (\Exception $e) {
-            
             throw new InvalidRequestException($e->getMessage(), $e->getCode(), $e);
         }
 
-        return $this->response = new CompletePurchaseResponse($this, $responseData);
+        return $this->response = new CompletePurchaseResponse($this, $response);
     }
 }
