@@ -1,60 +1,45 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Omnipay\Paystack\Message;
 
 use Omnipay\Common\Exception\InvalidRequestException;
+use Omnipay\Common\Message\ResponseInterface;
 
 class PurchaseRequest extends AbstractRequest
 {
-    /**
-     * @inheritDoc
-     */
-    public function getApiEndpoint()
+    public function getApiEndpoint(): string
     {
         return '/transaction/initialize';
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getData()
+    public function getData(): array
     {
         $this->validate('amount', 'email');
 
-        $amount = $this->getAmountInteger();
-        $email = $this->getParameter('email');
-
         return [
-            'amount' => $amount,
+            'amount' => $this->getAmountInteger(),
             'currency' => $this->getCurrency(),
-            'email' => $email,
+            'email' => $this->getParameter('email'),
             'reference' => $this->getTransactionReference(),
             'callback_url' => $this->getReturnUrl(),
-            'metadata' => $this->getParameter('metadata')
+            'metadata' => $this->getParameter('metadata'),
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function sendData($data)
+    public function sendData($data): ResponseInterface
     {
         try {
             $response = $this->sendRequest('POST', $this->getApiEndpoint(), $data);
         } catch (\Exception $e) {
-            throw new InvalidRequestException($e->getMessage(), $e->getCode(), $e);
+            throw new InvalidRequestException($e->getMessage(), (int) $e->getCode(), $e);
         }
 
-        return $this->response = new PurchaseResponse($this, $response);
+        return $this->response = new PurchaseResponse($this, $response ?? []);
     }
 
-    /**
-     * Sets the email parameter.
-     *
-     * @param string $email
-     * @return $this
-     */
-    public function setEmail($email)
+    public function setEmail(mixed $email): static
     {
         return $this->setParameter('email', $email);
     }
