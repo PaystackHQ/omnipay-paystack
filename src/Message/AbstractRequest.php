@@ -1,59 +1,67 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Omnipay\Paystack\Message;
 
 use Omnipay\Common\Exception\InvalidRequestException;
+use Omnipay\Common\Message\AbstractRequest as OmnipayAbstractRequest;
+use Psr\Http\Message\ResponseInterface;
 
-abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
+abstract class AbstractRequest extends OmnipayAbstractRequest
 {
-    protected $baseApiEndpoint = 'https://api.paystack.co';
+    protected string $baseApiEndpoint = 'https://api.paystack.co';
 
-    /**
-     * @return string The URL endpoint for the request
-     * @throws InvalidRequestException
-     */
-    public function getApiEndpoint()
+    public function getApiEndpoint(): string
     {
         throw new InvalidRequestException('Api endpoint not implemented');
     }
 
-    public function getPublicKey()
+    public function getPublicKey(): mixed
     {
         return $this->getParameter('public_key');
     }
 
-    public function setPublicKey($value)
+    public function setPublicKey(mixed $value): static
     {
-        $this->setParameter('public_key', $value);
+        return $this->setParameter('public_key', $value);
     }
 
-    public function getSecretKey()
+    public function getSecretKey(): mixed
     {
         return $this->getParameter('secret_key');
     }
 
-    public function setSecretKey($value)
+    public function setSecretKey(mixed $value): static
     {
-        $this->setParameter('secret_key', $value);
+        return $this->setParameter('secret_key', $value);
     }
 
-    protected function sendRequest($method, $endpoint, array $data = null)
+    /**
+     * @param  array<string, mixed>|null  $data
+     * @return array<string, mixed>|null
+     */
+    protected function sendRequest(string $method, string $endpoint, ?array $data = null): ?array
     {
         $headers = [
-            'Authorization' => 'Bearer ' . $this->getSecretKey(),
+            'Authorization' => 'Bearer '.$this->getSecretKey(),
             'Content-Type' => 'application/json',
-            'Cache-Control' => 'no-cache'
+            'Cache-Control' => 'no-cache',
         ];
 
-        $url = $this->baseApiEndpoint . $endpoint;
+        $url = $this->baseApiEndpoint.$endpoint;
+        $body = $data === null || $data === [] ? null : json_encode($data);
+
+        /** @var ResponseInterface $response */
         $response = $this->httpClient->request(
             $method,
             $url,
             $headers,
-            json_encode($data)
+            $body
         );
-        $responseData = json_decode((string)$response->getBody(), true);
 
-        return $responseData;
+        $responseData = json_decode((string) $response->getBody(), true);
+
+        return is_array($responseData) ? $responseData : null;
     }
 }

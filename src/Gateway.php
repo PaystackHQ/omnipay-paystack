@@ -1,30 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Omnipay\Paystack;
 
 use Omnipay\Common\AbstractGateway;
+use Omnipay\Common\Message\RequestInterface;
 use Omnipay\Paystack\Message\CompletePurchaseRequest;
 use Omnipay\Paystack\Message\PurchaseRequest;
 use Omnipay\Paystack\Message\RefundRequest;
 
-/**
- * PayStack Gateway
- *
- */
 class Gateway extends AbstractGateway
 {
-    /**
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return 'Paystack';
     }
 
-    /**
-     * @return array
-     */
-    public function getDefaultParameters()
+    public function getDefaultParameters(): array
     {
         return [
             'secret_key' => '',
@@ -32,60 +25,37 @@ class Gateway extends AbstractGateway
         ];
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSecretKey()
+    public function getSecretKey(): mixed
     {
         return $this->getParameter('secret_key');
     }
 
-    /**
-     * @param $value
-     * @return Gateway
-     */
-    public function setSecretKey($value)
+    public function setSecretKey(mixed $value): static
     {
         return $this->setParameter('secret_key', $value);
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPublicKey()
+    public function getPublicKey(): mixed
     {
         return $this->getParameter('public_key');
     }
 
-    /**
-     * @param $value
-     * @return Gateway
-     */
-    public function setPublicKey($value)
+    public function setPublicKey(mixed $value): static
     {
         return $this->setParameter('public_key', $value);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function purchase(array $parameters = [])
+    public function purchase(array $parameters = []): RequestInterface
     {
         return $this->createRequest(PurchaseRequest::class, $parameters);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function completePurchase(array $parameters = [])
+    public function completePurchase(array $parameters = []): RequestInterface
     {
         return $this->createRequest(CompletePurchaseRequest::class, $parameters);
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function refund(array $parameters = [])
+    public function refund(array $parameters = []): RequestInterface
     {
         return $this->createRequest(RefundRequest::class, $parameters);
     }

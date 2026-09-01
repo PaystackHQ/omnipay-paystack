@@ -1,38 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Omnipay\Paystack\Message;
 
 use Omnipay\Common\Exception\InvalidRequestException;
+use Omnipay\Common\Message\ResponseInterface;
 
 class CompletePurchaseRequest extends AbstractRequest
 {
-    /**
-     * @inheritDoc
-     */
-    public function getApiEndpoint()
+    public function getApiEndpoint(): string
     {
-        return '/transaction/verify/' . rawurlencode($this->getTransactionReference());
+        return '/transaction/verify/'.rawurlencode((string) $this->getTransactionReference());
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getData()
+    public function getData(): array
     {
         return [];
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function sendData($data)
+    public function sendData($data): ResponseInterface
     {
         try {
-            $response = $this->sendRequest('GET', $this->getApiEndpoint(), $data);
+            $response = $this->sendRequest('GET', $this->getApiEndpoint());
         } catch (\Exception $e) {
-            throw new InvalidRequestException($e->getMessage(), $e->getCode(), $e);
+            throw new InvalidRequestException($e->getMessage(), (int) $e->getCode(), $e);
         }
 
-        return $this->response = new CompletePurchaseResponse($this, $response);
+        return $this->response = new CompletePurchaseResponse($this, $response ?? []);
     }
 }
