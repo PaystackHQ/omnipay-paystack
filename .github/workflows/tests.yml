@@ -1,0 +1,48 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
+        dependencies: ['highest']
+        include:
+          - php: '7.2'
+            dependencies: 'lowest'
+          - php: '8.5'
+            dependencies: 'lowest'
+    name: PHP ${{ matrix.php }} (${{ matrix.dependencies }})
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+      - name: Install dependencies
+        run: |
+          if [ "${{ matrix.dependencies }}" = "lowest" ]; then
+            composer update --prefer-lowest --prefer-stable --no-interaction --no-progress
+          else
+            composer update --no-interaction --no-progress
+          fi
+      - name: Run tests
+        # PHPUnit 10+ only reports PHP deprecations, warnings and notices; make them fail the build.
+        run: |
+          if vendor/bin/phpunit --version | grep -qE 'PHPUnit (1[0-9])\.'; then
+            vendor/bin/phpunit --fail-on-deprecation --fail-on-warning --fail-on-notice
+          else
+            vendor/bin/phpunit
+          fi
+      - name: Check code style
+        run: vendor/bin/phpcs --standard=PSR2 src/

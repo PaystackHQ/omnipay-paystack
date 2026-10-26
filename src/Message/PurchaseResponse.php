@@ -24,7 +24,7 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
     public function getRedirectUrl()
     {
         if (isset($this->data['data']) && $data = $this->data['data']) {
-            return $data['authorization_url'];
+            return $data['authorization_url'] ?? null;
         }
 
         return '';
@@ -53,7 +53,7 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
     public function getCode()
     {
         if (isset($this->data['data']) && $data = $this->data['data']) {
-            return $data['access_code'];
+            return $data['access_code'] ?? null;
         }
 
         return '';
@@ -62,7 +62,7 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
     public function getTransactionReference()
     {
         if (isset($this->data['data']) && $data = $this->data['data']) {
-            return $data['reference'];
+            return $data['reference'] ?? null;
         }
 
         return '';
