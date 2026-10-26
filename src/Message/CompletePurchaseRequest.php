@@ -11,7 +11,7 @@ class CompletePurchaseRequest extends AbstractRequest
      */
     public function getApiEndpoint()
     {
-        return '/transaction/verify/' . rawurlencode($this->getTransactionReference());
+        return '/transaction/verify/' . rawurlencode((string) $this->getTransactionReference());
     }
 
     /**

@@ -37,7 +37,7 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         $this->setParameter('secret_key', $value);
     }
 
-    protected function sendRequest($method, $endpoint, array $data = null)
+    protected function sendRequest($method, $endpoint, ?array $data = null)
     {
         $headers = [
             'Authorization' => 'Bearer ' . $this->getSecretKey(),
