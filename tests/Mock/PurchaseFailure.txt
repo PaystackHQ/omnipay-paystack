@@ -1,0 +1,10 @@
+HTTP/1.1 401 Unauthorized
+Server: Apache
+Date: Sun, 11 May 2014 21:17:31 GMT
+Content-Type: application/json; charset=utf-8
+Status: 401 Unauthorized
+
+{
+  "status": false,
+  "message": "Invalid key"
+}

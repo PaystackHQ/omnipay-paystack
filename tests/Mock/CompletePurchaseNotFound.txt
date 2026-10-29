@@ -1,0 +1,10 @@
+HTTP/1.1 400 Bad Request
+Server: Apache
+Date: Sun, 11 May 2014 21:17:31 GMT
+Content-Type: application/json; charset=utf-8
+Status: 400 Bad Request
+
+{
+  "status": false,
+  "message": "Transaction reference not found"
+}
