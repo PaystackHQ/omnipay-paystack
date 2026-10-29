@@ -1,0 +1,21 @@
+HTTP/1.1 200 OK
+Server: Apache
+Date: Sun, 11 May 2014 21:17:31 GMT
+Content-Type: application/json; charset=utf-8
+Status: 200 OK
+
+{
+  "status": true,
+  "message": "Verification successful",
+  "data": {
+    "id": 549256455,
+    "domain": "test",
+    "status": "failed",
+    "reference": "0rujfjycxj",
+    "amount": 250000,
+    "message": null,
+    "gateway_response": "Declined",
+    "channel": "card",
+    "currency": "NGN"
+  }
+}

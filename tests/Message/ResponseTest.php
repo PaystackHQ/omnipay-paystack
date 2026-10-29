@@ -6,7 +6,7 @@ use Omnipay\Tests\TestCase;
 
 class ResponseTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->markTestSkipped('Must be revisited.');
 

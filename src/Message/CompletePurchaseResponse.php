@@ -15,7 +15,7 @@ class CompletePurchaseResponse extends AbstractResponse
     public function getTransactionId()
     {
         if (isset($this->data['data']) && $data = $this->data['data']) {
-            if ($data['reference']) {
+            if (!empty($data['reference'])) {
                 return $data['reference'];
             }
         }
@@ -24,13 +24,13 @@ class CompletePurchaseResponse extends AbstractResponse
     public function getMessage()
     {
         if (isset($this->data['data']) && $data = $this->data['data']) {
-            if ($data['message']) {
+            if (!empty($data['message'])) {
                 return $data['message'];
             }
         }
 
         if (isset($this->data['data']) && $data = $this->data['data']) {
-            if ($data['gateway_response']) {
+            if (!empty($data['gateway_response'])) {
                 return $data['gateway_response'];
             }
         }
@@ -45,7 +45,7 @@ class CompletePurchaseResponse extends AbstractResponse
     public function getTransactionReference()
     {
         if (isset($this->data['data']) && $data = $this->data['data']) {
-            return $data['reference'];
+            return $data['reference'] ?? null;
         }
 
         return '';
@@ -55,7 +55,7 @@ class CompletePurchaseResponse extends AbstractResponse
     public function getCode()
     {
         if (isset($this->data['data']) && $data = $this->data['data']) {
-            return $data['status'];
+            return $data['status'] ?? null;
         }
 
         return '';
