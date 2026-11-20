@@ -5,10 +5,11 @@ processing library for PHP. This package implements Paystack support for Omnipay
 
 Requires PHP 7.2 or later. The test suite runs on PHP 7.2–8.5.
 
-In production, use a supported PHP release that includes the 21 Oct 2026 security fixes for critical
-remote code execution flaws (GHSA-w8hw-w9fx-j79w, GHSA-6wmf-4rv5-p3rp): **8.2.35, 8.3.36, 8.4.27,
-8.5.12 or later** ([php.net advisory](https://www.php.net/releases/8_2_35.php)). PHP 8.1 and older
-no longer receive security fixes.
+In production, use a supported PHP release that includes the 19 Nov 2026 security fixes (seven
+critical flaws in PHP-FPM, sessions and the engine, on top of October's remote code execution fixes):
+**8.2.36, 8.3.37, 8.4.28, 8.5.13 or later** ([php.net news archive](https://www.php.net/archive/2026.php)).
+The October releases (8.2.35, 8.3.36, 8.4.27, 8.5.12) do not include these fixes. PHP 8.1 and older
+no longer receive security fixes, and PHP 8.2 reaches end of life on 31 Dec 2026.
 
 ## Install
 
