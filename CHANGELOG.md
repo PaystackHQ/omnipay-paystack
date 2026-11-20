@@ -2,6 +2,14 @@
 
 All Notable changes to `omnipay-paystack` will be documented in this file
 
+## NEXT - YYYY-MM-DD
+
+### Security
+
+-   README now points to the 19 Nov 2026 PHP security releases (8.2.36, 8.3.37, 8.4.28, 8.5.13) as the
+    minimum for production. The flaws are in the PHP runtime (PHP-FPM, sessions, engine, streams, SOAP,
+    DOM, Phar), not in this package, so there are no code changes
+
 ## 1.1.0 - 2026-10-29
 
 ### Added
